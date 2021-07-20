@@ -1,0 +1,8 @@
+---
+- hosts: windows
+  gather_facts: true
+  tasks:
+  - name: "create directory in target node"
+    win_file:
+     path: C:\Temp
+     state: directory
