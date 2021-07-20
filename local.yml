@@ -1,5 +1,5 @@
 ---
-- hosts1: windows
+- hosts: windows
   gather_facts: true
   tasks:
   - name: "create directory in target node"
