@@ -10,7 +10,7 @@
       vars:
         ansible_connection: ssh
     - name: add devices with connectivity to the "running_hosts" group
-       group_by:
+       ansible.builtin.group:
          key: "running_hosts"
     rescue:
     - debug: 
