@@ -1,22 +1,28 @@
 --- 
-- hosts: windows
+- 
   connection: local
-  gather_facts: no
-  tasks:
-  - block:
-    - name: determine hosts that are up
-      wait_for_connection:
-        timeout: 5
-      vars:
-        ansible_connection: ssh
-    - name: add devices with connectivity to the "running_hosts" group
-       ansible.builtin.group:
-         key: "running_hosts"
-    rescue:
-    - debug: 
-        msg: "cannot connect to {{ inventory_hostname }}"
-
-- hosts: running_hosts
-  gather_facts: no
-  tasks:
-  - command: date
+  gather_facts: false
+  hosts: windows
+  tasks: 
+    - 
+      block: 
+        - 
+          name: "determine hosts that are up"
+          vars: 
+            ansible_connection: ssh
+          wait_for_connection: 
+            timeout: 5
+        - 
+          group_by: 
+            key: running_hosts
+          name: "add devices with connectivity to the \"running_hosts\" group"
+      rescue: 
+        - 
+          debug: 
+            msg: "cannot connect to {{ inventory_hostname }}"
+- 
+  gather_facts: false
+  hosts: running_hosts
+  tasks: 
+    - 
+      command: date
